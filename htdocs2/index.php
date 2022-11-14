@@ -34,10 +34,10 @@ $event = $json->events[0];
 if($event->type == 'message') {
     $messageData = $event->message;
     if($messageData->type == 'text') {
-        if($messageData->text == '委員長') {
-            $replyText = '月ノ美兎';
-        } else if($messageData->text == '皇女') {
-            $replyText = 'リゼ・ヘルエスタ';
+        if($messageData->text == 'ガブリエル') {
+            $replyText = 'ジェズス';
+        } else if($messageData->text == 'マルティン') {
+            $replyText = 'ウーデゴール';
         } else {
             $replyText = $messageData->text;
         }
