@@ -1,5 +1,6 @@
 {
     "require": {
-        "linecorp/line-bot-sdk": "^7.5"
+        "linecorp/line-bot-sdk": "^7.5",
+        "fabpot/goutte": "^4.0"
     }
 }
