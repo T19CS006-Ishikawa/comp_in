@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '8e9caf3e81b9ed1a2b367845b32594399a0230c7',
+        'reference' => 'c9f655d60e0c9a3df4faeabf37c43375f73f8a7a',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '8e9caf3e81b9ed1a2b367845b32594399a0230c7',
+            'reference' => 'c9f655d60e0c9a3df4faeabf37c43375f73f8a7a',
             'dev_requirement' => false,
         ),
         'linecorp/line-bot-sdk' => array(
