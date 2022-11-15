@@ -27,7 +27,7 @@ $json = json_decode($input);
 
 //アクセストークンを使いCurlHTTPClientをインスタンス化
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '9dd5b0db9baa14fcfb44558627c6fbeb']);
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
 
 $event = $json->events[0];
 if($event->type == 'message') {
