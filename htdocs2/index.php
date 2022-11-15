@@ -37,7 +37,10 @@ if($event->type == 'message') {
             $replyText = 'ジェズス';
         } else if($messageData->text == 'マルティン') {
             $replyText = 'ウーデゴール';
-        } else {
+        } else if($messageData->text == 'アーセナル') {
+            $replyText = 'ヘッドコーチ：ミケル・アルテタ';
+            $replyText = 'キャプテン：ミケル・アルテタ';
+        }else {
             $replyText = $messageData->text;
         }
     } else if($messageData->type == 'image') {
