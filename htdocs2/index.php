@@ -38,8 +38,7 @@ if($event->type == 'message') {
         } else if($messageData->text == 'マルティン') {
             $replyText = 'ウーデゴール';
         } else if($messageData->text == 'アーセナル') {
-            $replyText = 'ヘッドコーチ：ミケル・アルテタ';
-            $replyText = 'キャプテン：ミケル・アルテタ';
+            $replyText = 'ヘッドコーチ：ミケル・アルテタ＜br＞キャプテン：マルティン・ウーデゴール';
         }else {
             $replyText = $messageData->text;
         }
