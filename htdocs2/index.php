@@ -1,8 +1,6 @@
 <?php
 /*
-    //Composerでインストールしたライブラリを一括読み込み
-    require_once __DIR__ . '/vendor/autoload.php';
-    
+ 
     //アクセストークンを使いCurlHTTPClientをインスタンス化
     $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
     
@@ -21,13 +19,14 @@
     }
     
     */
-
+//Composerでインストールしたライブラリを一括読み込み
 require_once __DIR__ . '/vendor/autoload.php';
 
 $input = file_get_contents('php://input');
 $json = json_decode($input);
 
-$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('DzNOTsY/Ht98S9QxPPUNcjN5m85UvSY1lEpZyfyLN+RFcuUs2laRz664s33dV/DYK+Q1b4COWuJTxhs/NBc0KcTQG4Fe52Gz+rsdAWSLbFQ8m8FAHoP/gU7lwCg5vZlggPAQOZAkKOBa7iDDAc+xNAdB04t89/1O/w1cDnyilFU=');
+//アクセストークンを使いCurlHTTPClientをインスタンス化
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '9dd5b0db9baa14fcfb44558627c6fbeb']);
 
 $event = $json->events[0];
