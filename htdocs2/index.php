@@ -29,7 +29,11 @@ $json = json_decode($input);
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
 
-$event = $json->events[0];
+//$event = $json->events[0];
+$signature = $_SERVER['HTTP_' . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
+
+foreach ($events as $event){
 if($event->type == 'message') {
     $messageData = $event->message;
     if($messageData->type == 'text') {
@@ -48,6 +52,24 @@ if($event->type == 'message') {
         $replyText = "テキスト・画像以外";
     }
 }
+}
+
+//＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+
+
+
+/*
+try {
+    $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
+} catch(\LINE\LINEBot\Exception\InvalidSignatureException $e) {
+    error_log('parseEventRequest failed. InvalidSignatureException => '.var_export($e, true));
+} catch(\LINE\LINEBot\Exception\UnknownEventTypeException $e) {
+    error_log('parseEventRequest failed. UnknownEventTypeException => '.var_export($e, true));
+} catch(\LINE\LINEBot\Exception\UnknownMessageTypeException $e) {
+    error_log('parseEventRequest failed. UnknownMessageTypeException => '.var_export($e, true));
+} catch(\LINE\LINEBot\Exception\InvalidEventRequestException $e) {
+    error_log('parseEventRequest failed. InvalidEventRequestException => '.var_export($e, true));
+    */
 
 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyText);
 $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
