@@ -39,9 +39,7 @@ if($event->type == 'message') {
             $replyText = 'デ・ブライネ';
         } else if($messageData->text == 'アーリング') {
             $replyText = 'ハーランド';
-        }else if($messageData->text == 'ひかる') {
-            $replyText = '@f_f5dc';
-        } else {
+        }else {
             $replyText = $messageData->text;
         }
     } else if($messageData->type == 'image') {
