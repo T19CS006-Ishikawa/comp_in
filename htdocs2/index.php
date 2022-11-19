@@ -26,6 +26,7 @@ $json = json_decode($input);
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
 
+$test = "Baby Don't Lke It";
 
 $event = $json->events[0];
 if($event->type == 'message') {
@@ -39,6 +40,8 @@ if($event->type == 'message') {
             $replyText = 'デ・ブライネ';
         } else if($messageData->text == 'アーリング') {
             $replyText = 'ハーランド';
+        }else if($messageData->text == 'NCT'){
+            $replyText = $test;
         }else {
             $replyText = $messageData->text;
         }
