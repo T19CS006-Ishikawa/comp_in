@@ -25,10 +25,17 @@ $json = json_decode($input);
 //アクセストークンを使いCurlHTTPClientをインスタンス化
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
+$userID = 'U9efd3497669302c628518420a60ebe92';
 
-$test = "Baby Don't Lke It";
+$testData = file_get_contents($filename); 
+$test = "テストメッセージです";
 
 $event = $json->events[0];
+
+
+//以下応答BOTのためのコード
+//＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿//
+/*
 if($event->type == 'message') {
     $messageData = $event->message;
     if($messageData->type == 'text') {
@@ -39,7 +46,7 @@ if($event->type == 'message') {
         }else if($messageData->text == 'ケビン') {
             $replyText = 'デ・ブライネ';
         } else if($messageData->text == 'アーリング') {
-            $replyText = 'ハーランド';
+            $replyText = "ハーランド";
         }else if($messageData->text == 'NCT'){
             $replyText = $test;
         }else {
@@ -51,11 +58,11 @@ if($event->type == 'message') {
         $replyText = "テキスト・画像以外";
     }
 }
+*/
+//＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿//
 
+$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($test);
+$bot->pushMessage($userID, $textMessageBuilder);
 
-
-
-$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyText);
-$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 return;
 ?>
