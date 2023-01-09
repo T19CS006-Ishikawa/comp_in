@@ -20,12 +20,11 @@ define('USERID', 'U9efd3497669302c628518420a60ebe92');
         $bot->replyText($event -> getReplyToken(),'TextMessage');
     }
     
-    */
+   */
 //Composerでインストールしたライブラリを一括読み込み
 require_once __DIR__ . '/vendor/autoload.php';
-
-//$input = file_get_contents('php://input');
-//$json = json_decode($input);
+$input = file_get_contents('php://input');
+$json = json_decode($input);
 
 //アクセストークンを使いCurlHTTPClientをインスタンス化
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(ACCESSTOKEN);
