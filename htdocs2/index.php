@@ -65,8 +65,8 @@ if($event->type == 'message') {
 */
 //＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿//
 
-$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($test);
-$bot->pushMessage(USERID, $textMessageBuilder);
+///$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($test);
+///$bot->pushMessage(USERID, $textMessageBuilder);
 
 return;
 ?>
