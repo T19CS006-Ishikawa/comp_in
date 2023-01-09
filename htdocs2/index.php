@@ -21,6 +21,8 @@ define('USERID', 'U9efd3497669302c628518420a60ebe92');
     }
     
    */
+
+/*-------------
 //Composerでインストールしたライブラリを一括読み込み
 require_once __DIR__ . '/vendor/autoload.php';
 $input = file_get_contents('php://input');
@@ -30,7 +32,8 @@ $json = json_decode($input);
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(ACCESSTOKEN);
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret'=>SECRET]);
 
-
+---------------
+*/
 //$testData = file_get_contents($filename); 
 $test = "テストメッセージです";
 
@@ -67,6 +70,6 @@ if($event->type == 'message') {
 
 ///$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($test);
 ///$bot->pushMessage(USERID, $textMessageBuilder);
-
+echo $test;
 return;
 ?>
