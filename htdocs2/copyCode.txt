@@ -20,6 +20,33 @@
         $bot->replyText($event -> getReplyToken(),'TextMessage');
     }
     
+    //以下応答BOTのためのコード
+//＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿//
+/*
+ if($event->type == 'message') {
+ $messageData = $event->message;
+ if($messageData->type == 'text') {
+ if($messageData->text == 'ガブリエル') {
+ $replyText = 'ジェズス';
+ } else if($messageData->text == 'マルティン') {
+ $replyText = 'ウーデゴール';
+ }else if($messageData->text == 'ケビン') {
+ $replyText = 'デ・ブライネ';
+ } else if($messageData->text == 'アーリング') {
+ $replyText = "ハーランド";
+ }else if($messageData->text == 'NCT'){
+ $replyText = $test;
+ }else {
+ $replyText = $messageData->text;
+ }
+ } else if($messageData->type == 'image') {
+ $replyText = '画像';
+ } else {
+ $replyText = "テキスト・画像以外";
+ }
+ }
+ */
+//＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿//
     
     
 ?>
