@@ -23,9 +23,15 @@ $input = file_get_contents('php://input');
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(ACCESSTOKEN);
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret'=>SECRET]);
 
+//＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿//
+$path = 'https://app-for-lms.herokuapp.com/csvData/list.txt';
+$data = file_get_contents($path);
+
+//＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿//
+
 
 //$testData = file_get_contents($filename);
-$message = "今日は１月１２日です";
+$message = $data;
 
 //$event = $json->events[0];
 
