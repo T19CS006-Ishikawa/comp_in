@@ -26,7 +26,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret'=>SECRET]);
 //＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿//
 $path = 'https://app-for-lms.herokuapp.com/csvData/list.txt';
 $data = file_get_contents($path);
-
+echo $data;
 //＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿//
 
 
