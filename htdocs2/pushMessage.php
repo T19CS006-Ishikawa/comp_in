@@ -24,16 +24,12 @@ $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(ACCESSTOKEN);
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret'=>SECRET]);
 
 //＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿//
-$path = 'https://app-for-lms.herokuapp.com/csvData/data.txt';
+$path = 'https://app-for-lms.herokuapp.com/csvData/push.txt';
 $data = file_get_contents($path);
 echo $data;
 //＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿//
 
-
-//$testData = file_get_contents($filename);
 $message = $data;
-
-//$event = $json->events[0];
 
 
 
