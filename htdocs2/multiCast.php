@@ -21,7 +21,7 @@ $json_object = json_decode($json_string);
 
 $event_type     = $json_object->{"events"}[0]->{"type"};
 $userId         = $json_object->{"events"}[0]->{"source"}->{"userId"};
-$userID_array = array();
+
 
 if($event_type === "follow" ){
     file_put_contents("follow.txt", $userId.",",FILE_APPEND);
@@ -34,11 +34,11 @@ if($event_type === "unfollow"){
     if(in_array($userId,$id_array)){
         $pos = array_search($userId, $id_array);
         $userID_array = array_splice($id_array, $pos);
-        for($num = 0;$num < count($userID_array);$num++){
+        for($num = 0;$num < count($userID_array)-1;$num++){
             if($num == 0){
                 $text = $userID_array[$num];
             }
-            else if($num == count($userID_array)-1){
+            else if($num == count($userID_array)-2){
                 $text = $text.$userID_array[$num];
             }else{
                 $text = $text.$userID_array[$num].',';
