@@ -35,7 +35,10 @@ if($event_type === "unfollow"){
         $pos = array_search($userId, $id_array);
         $userID_array = array_splice($id_array, $pos);
         for($num = 0;$num < count($userID_array);$num++){
-            if($num == count($userID_array)-1){
+            if($num == 0){
+                $text = $userID_array[$num];
+            }
+            else if($num == count($userID_array)-1){
                 $text = $text.$userID_array[$num];
             }else{
                 $text = $text.$userID_array[$num].',';
