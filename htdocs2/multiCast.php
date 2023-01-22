@@ -24,16 +24,24 @@ $userId         = $json_object->{"events"}[0]->{"source"}->{"userId"};
 $userID_array = array();
 
 if($event_type === "follow" ){
-    //file_put_contents("follow.txt", $userId.",",FILE_APPEND);
-    if(in_array($userId, $$userID_array)){
-        array_push($userId,$userId);
-    }
+    file_put_contents("follow.txt", $userId.",",FILE_APPEND);
 }
 
+
 if($event_type === "unfollow"){
-    if(in_array($userId,$userID_array)){
-        $pos = array_search($userId, $userID_array);
-        $userID_array = array_splice($userID_array, $pos);
+    $textfile = file_get_contents(__DIR__.'follow.txt');
+    $id_array = explode(',',$textfile);
+    if(in_array($userId,$id_array)){
+        $pos = array_search($userId, $id_array);
+        $userID_array = array_splice($id_array, $pos);
+        for($num = 0;$num < count($userID_array);$num++){
+            if($num == count($userID_array)-1){
+                $text = $text.$userID_array[$num];
+            }else{
+                $text = $text.$userID_array[$num].',';
+            }
+        }
+        file_put_contents("follow.txt",$text);
     }
 }
 
