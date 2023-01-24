@@ -20,17 +20,6 @@ require_once __DIR__ . '/vendor/autoload.php';
 $json_string = file_get_contents('php://input');
 $json_object = json_decode($json_string);
 
-$event_type     = $json_object->{"events"}[0]->{"type"};
-$userId         = $json_object->{"events"}[0]->{"source"}->{"userId"};
-
-if($event_type === "follow" || $event_type === "unfollow"){
-    file_put_contents("follow.log",$userId . ",", FILE_APPEND);
-    exit;
-}
-$ids = file_get_contents("file.log");
-$user_ids = explode(',', $ids);
-$trush = array_pop($user_ids);
-
 //アクセストークンを使いCurlHTTPClientをインスタンス化
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(ACCESSTOKEN);
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret'=>SECRET]);
@@ -39,13 +28,47 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret'=>SECRET]);
 $path = 'https://app-for-lms.herokuapp.com/csvData/push.txt';
 $data = file_get_contents($path);
 echo $data;
-//＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿//
 
 $message = $data;
+//＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿//
+$headers = [
+'Authorization: Bearer ' . $channelToken,
+'Content-Type: application/json; charset=utf-8',
+];
+$text = 'test2'; //メッセージテキスト
+$post = [
+    'messages' => [
+            [
+                'type' => 'text',
+                'text' => $message,
+            ],
+         ],
+];
 
-$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message);
- //$bot->pushMessage(USERID, $textMessageBuilder);
-$bot->multicast($user_ids, $textMessageBuilder);
-echo $test;
-return;
+$post = json_encode($post);
+
+$ch = curl_init('https://api.line.me/v2/bot/message/broadcast'); //一斉送信
+$options = [
+CURLOPT_CUSTOMREQUEST => 'POST',
+CURLOPT_HTTPHEADER => $headers,
+CURLOPT_RETURNTRANSFER => true,
+CURLOPT_BINARYTRANSFER => true,
+CURLOPT_HEADER => true,
+CURLOPT_POSTFIELDS => $post,
+];
+curl_setopt_array($ch, $options);
+
+$result = curl_exec($ch);
+$errno = curl_errno($ch);
+if ($errno) {
+    return;
+}
+
+$info = curl_getinfo($ch);
+$httpStatus = $info['http_code']; //200なら成功
+
+$responseHeaderSize = $info['header_size'];
+$body = substr($result, $responseHeaderSize); //エラーメッセージ等
+
+echo $httpStatus . '_' . $body; //ログ出力
 ?>
