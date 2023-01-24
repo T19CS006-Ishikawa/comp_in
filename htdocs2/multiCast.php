@@ -32,10 +32,10 @@ echo $data;
 $message = $data;
 //＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿//
 $headers = [
-'Authorization: Bearer ' . $channelToken,
+'Authorization: Bearer ' . ACCESSTOKEN,
 'Content-Type: application/json; charset=utf-8',
 ];
-$text = 'test2'; //メッセージテキスト
+
 $post = [
     'messages' => [
             [
@@ -49,12 +49,12 @@ $post = json_encode($post);
 
 $ch = curl_init('https://api.line.me/v2/bot/message/broadcast'); //一斉送信
 $options = [
-CURLOPT_CUSTOMREQUEST => 'POST',
-CURLOPT_HTTPHEADER => $headers,
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_BINARYTRANSFER => true,
-CURLOPT_HEADER => true,
-CURLOPT_POSTFIELDS => $post,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_HTTPHEADER => $headers,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_BINARYTRANSFER => true,
+    CURLOPT_HEADER => true,
+    CURLOPT_POSTFIELDS => $post,
 ];
 curl_setopt_array($ch, $options);
 
