@@ -23,29 +23,9 @@ $event_type     = $json_object->{"events"}[0]->{"type"};
 $userId         = $json_object->{"events"}[0]->{"source"}->{"userId"};
 
 
-if($event_type === "follow" ){
-    file_put_contents("follow.txt", $userId.",",FILE_APPEND);
-}
-
-
-if($event_type === "unfollow"){
-    $textfile = file_get_contents(__DIR__.'follow.txt');
-    $id_array = explode(',',$textfile);
-    if(in_array($userId,$id_array)){
-        $pos = array_search($userId, $id_array);
-        $userID_array = array_splice($id_array, $pos);
-        for($num = 0;$num < count($userID_array)-1;$num++){
-            if($num == 0){
-                $text = $userID_array[$num];
-            }
-            else if($num == count($userID_array)-2){
-                $text = $text.$userID_array[$num];
-            }else{
-                $text = $text.$userID_array[$num].',';
-            }
-        }
-        file_put_contents("follow.txt",$text);
-    }
+if($event_type === "follow" || $event_type === "unfollow"){
+    file_put_contents("follow.log", $event_type . " " .$userId . "\n", FILE_APPEND);
+    exit;
 }
 
 //アクセストークンを使いCurlHTTPClientをインスタンス化
@@ -60,11 +40,23 @@ echo $data;
 
 $message = $data;
 
-$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message);
-$count = count($userID_array);
-for($num = 0 ;$num < $count;$num++){
-$bot->pushMessage($userID_array[$num], $textMessageBuilder);
-}
-echo $test;
+$replyToken     = $json_object->{"events"}[0]->{"replyToken"};
+//$message_text   = $json_object->{"events"}[0]->{"message"}->{"text"};
+//$message_type   = $json_object->{"events"}[0]->{"message"}->{"type"};
+
+$response_format_text = array( "type" => 'text', "text" => $message );
+$post_data = array( "replyToken" => $replyToken, "messages" => [$response_format_text] );
+
+$ch = curl_init("https://api.line.me/v2/bot/message/reply");
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode( $post_data, JSON_UNESCAPED_UNICODE ));
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json; charser=UTF-8',
+    'Authorization: Bearer ' . ACCESSTOKEN
+));
+curl_exec($ch);
+curl_close($ch);
 return;
 ?>

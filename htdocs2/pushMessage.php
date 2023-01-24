@@ -13,11 +13,11 @@ define('ACCESSTOKEN', 'DzNOTsY/Ht98S9QxPPUNcjN5m85UvSY1lEpZyfyLN+RFcuUs2laRz664s
 define('SECRET', '9dd5b0db9baa14fcfb44558627c6fbeb');
 define('USERID', 'U9efd3497669302c628518420a60ebe92');
 
-
 //Composerでインストールしたライブラリを一括読み込み
 require_once __DIR__ . '/vendor/autoload.php';
 $json_string = file_get_contents('php://input');
 $json_object = json_decode($json_string);
+
 
 //アクセストークンを使いCurlHTTPClientをインスタンス化
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(ACCESSTOKEN);
@@ -32,7 +32,9 @@ echo $data;
 $message = $data;
 
 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message);
-$bot->pushMessage(USERID, $textMessageBuilder);
+ //$bot->pushMessage(USERID, $textMessageBuilder);
+$bot->multicast(USERID, $textMessageBuilder);
+
 echo $test;
 return;
 ?>
